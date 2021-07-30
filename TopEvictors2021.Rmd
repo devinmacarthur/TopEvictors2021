@@ -1,0 +1,66 @@
+---
+title: "Oregon Top Evictors 2021"
+date: "7/30/2021"
+output: html_document
+---
+
+```{r globals, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, tidy.opts=list(width.cutoff=60)) 
+suppressPackageStartupMessages(library(dplyr))
+library(downloadthis)
+library(kableExtra)
+source("fun/topEvictorFuns.R")
+
+```
+
+### Oregon Top evictors from `r format(as.Date(fromDate), "%b %d")` to `r format(as.Date(toDate), "%b %d %Y")`
+```{r echo=FALSE}
+topEvictorFrequency() %>% 
+  kable() 
+  
+topEvictorFrequency() %>% 
+  download_this(
+    output_name = "OregonTopEvictors",
+    output_extension = ".csv",
+    button_label = "Download CSV",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save"
+    )
+```
+
+### Top Evictor Notice Frequencies
+```{r echo=FALSE}
+NoticeFreqWithDescript %>% 
+  kable() %>% 
+  kable_styling()
+
+NoticeFreqWithDescript %>% 
+  download_this(
+    output_name = "TopEvictorNoticeFreq",
+    output_extension = ".csv",
+    button_label = "Download CSV",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save"
+    )
+
+```
+
+### Pivot table of Oregon Evictors and Notice Causes
+```{r echo=FALSE}
+pivotTableEvictorNotice() %>% 
+  kable() %>% 
+  kable_styling()
+
+pivotTableEvictorNotice() %>%
+  download_this(
+    output_name = "OREvictorsNoticePivot",
+    output_extension = ".csv",
+    button_label = "Download CSV",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save"
+    )
+```
+
