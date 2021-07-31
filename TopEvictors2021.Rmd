@@ -1,6 +1,6 @@
 ---
 title: "Oregon Top Evictors 2021"
-date: "7/30/2021"
+date: "Posted 7-30-2021"
 output: html_document
 ---
 
@@ -16,7 +16,7 @@ source("fun/topEvictorFuns.R")
 ### Oregon Top evictors from `r format(as.Date(fromDate), "%b %d")` to `r format(as.Date(toDate), "%b %d %Y")`
 ```{r echo=FALSE}
 topEvictorFrequency() %>% 
-  kable() 
+  kable()
   
 topEvictorFrequency() %>% 
   download_this(
@@ -28,18 +28,46 @@ topEvictorFrequency() %>%
     icon = "fa fa-save"
     )
 ```
+<br>
 
-### Top Evictor Notice Frequencies
+The following is a report of observations from the Oregon Judicial Department's eviction court filing records and displays plaintiffs (landlords and property managers) with the highest rates of eviction filings against their tenant renters.  Among the top Oregon evictors from `r format(as.Date(fromDate), "%b")` to `r format(as.Date(toDate), "%b %Y")` include: 
+
+1. `r topEvictorFrequency()[1,1]` uses the `r topEvictorTopNoticePct(1)[1,1]` notice in `r topEvictorTopNoticePct(1)[1,3]*100` percent of their eviction cases. 
+2. `r topEvictorFrequency()[2,1]` uses the `r topEvictorTopNoticePct(2)[1,1]` notice in `r topEvictorTopNoticePct(2)[1,3]*100` percent of their eviction cases. 
+3. `r topEvictorFrequency()[3,1]` uses the `r topEvictorTopNoticePct(3)[1,1]` notice in `r topEvictorTopNoticePct(3)[1,3]*100` percent of their eviction cases. 
+
+This corresponds to trends in eviction notice types.  Out of all evictions cases in Oregon from `r format(as.Date(fromDate), "%b")` to `r format(as.Date(toDate), "%b %Y")`, the top three eviction notice types make up `r OLCNoticeFrequency()[1:3,3] %>% sum()` percent of eviction notices.  These are listed below.
+
 ```{r echo=FALSE}
-NoticeFreqWithDescript %>% 
+OLCNoticeFrequency()[1:3,] %>% 
   kable() %>% 
   kable_styling()
 
-NoticeFreqWithDescript %>% 
+OLCNoticeFrequency() %>% 
+  download_this(
+    output_name = "EvictonNoticeFreq",
+    output_extension = ".csv",
+    button_label = "Download Full-Table CSV",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save"
+    )
+```
+<br>
+<!-- The notices most often used by the Oregon top evictors corresponds to the two most common eviction notice types used by this group `r NoticeFreqWithDescript[1,2:3]` makes up `r topEvictorNoticeFreq()[1,3]*100` percent of cases; and `r NoticeFreqWithDescript[2,2:3]` makes up `r topEvictorNoticeFreq()[2,3]*100` percent of cases. -->
+
+Below is a table of the top 4 eviction notice frequencies only among the top evicting landlords i.e. evictors with 10 or more eviction cases between `r format(as.Date(fromDate), "%b")` and `r format(as.Date(toDate), "%b %Y")`. 
+
+```{r echo=FALSE}
+topEvictorNoticeFreq()[1:4,] %>% 
+  kable() %>% 
+  kable_styling()
+
+topEvictorNoticeFreq() %>% 
   download_this(
     output_name = "TopEvictorNoticeFreq",
     output_extension = ".csv",
-    button_label = "Download CSV",
+    button_label = "Download Full-Table CSV",
     button_type = "warning",
     has_icon = TRUE,
     icon = "fa fa-save"
@@ -63,4 +91,5 @@ pivotTableEvictorNotice() %>%
     icon = "fa fa-save"
     )
 ```
+<br>
 

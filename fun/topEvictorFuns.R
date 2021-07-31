@@ -51,6 +51,8 @@ OLCNoticeFrequency <- function() {
     group_by(Notice) %>% 
     summarise(freq = n()) %>% 
     arrange(desc(freq)) %>% 
+    mutate(pct = round(100*freq / sum(freq), 1)) %>% 
+    left_join(NoticeFreqWithDescript %>% select(Notice, Description), by = "Notice") %>% 
     return()
 }
 
@@ -59,5 +61,17 @@ topEvictorNoticeFreq <- function() {
     group_by(Notice) %>% 
     summarise(freq = n()) %>% 
     arrange(desc(freq)) %>% 
+    mutate(pct = round(100*freq / sum(freq), 1)) %>%
+    right_join(NoticeFreqWithDescript %>% select(Notice, Description), by = "Notice") %>% 
+    return()
+}
+
+topEvictorTopNoticePct <- function(row) {
+  topEvictorsWithOLCNotices() %>% 
+    filter(name == as.character(topEvictorFrequency()[row,1])) %>%  
+    group_by(Notice) %>% 
+    summarise(freq = n()) %>%
+    arrange(desc(freq)) %>% 
+    mutate(pct = round(freq / sum(freq), 3)) %>% 
     return()
 }
