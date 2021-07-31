@@ -25,7 +25,8 @@ topEvictorFrequency() %>%
     button_label = "Download CSV",
     button_type = "warning",
     has_icon = TRUE,
-    icon = "fa fa-save"
+    icon = "fa fa-save",
+    csv2 = FALSE
     )
 ```
 <br>
@@ -50,7 +51,8 @@ OLCNoticeFrequency() %>%
     button_label = "Download Full-Table CSV",
     button_type = "warning",
     has_icon = TRUE,
-    icon = "fa fa-save"
+    icon = "fa fa-save",
+    csv2 = FALSE
     )
 ```
 <br>
@@ -70,7 +72,8 @@ topEvictorNoticeFreq() %>%
     button_label = "Download Full-Table CSV",
     button_type = "warning",
     has_icon = TRUE,
-    icon = "fa fa-save"
+    icon = "fa fa-save",
+    csv2 = FALSE
     )
 
 ```
@@ -88,7 +91,8 @@ pivotTableEvictorNotice() %>%
     button_label = "Download CSV",
     button_type = "warning",
     has_icon = TRUE,
-    icon = "fa fa-save"
+    icon = "fa fa-save",
+    csv2 = FALSE
     )
 ```
 <br>
